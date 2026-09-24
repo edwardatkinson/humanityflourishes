@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7 Questions | Humanity Flourishes</title>
+    
+    <!-- High-end Editorial Serif (Added 300i for the delicate sweeping italic) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Color Palette: The Ink System */
+            --color-bg: #faf9f5;          /* Warm Ivory Canvas */
+            --color-ink: #0a0a09;         /* Absolute Presence (Active/Main Text) */
+            --color-slate: #4a4843;       /* The Echo (Historical/Quotes) */
+            --color-stone: #8c8a81;       /* The Architecture (UI, Numbers) */
+            --color-border: #e6e4dc;      /* Subtle border tone */
+            
+            /* Typography */
+            --font-serif: 'Crimson Pro', Georgia, serif;
+            --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            
+            /* Layout Sizing */
+            --max-width: 840px;           
+            --spacing-unit: 1.5rem;
+        }
+
+        /* --- BASE RESETS & CANVAS --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-ink);
+            font-family: var(--font-serif);
+            font-size: 1.85rem;           
+            line-height: 1.5;
+            font-weight: 400;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: calc(var(--spacing-unit) * 3) var(--spacing-unit) 20vh var(--spacing-unit);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        ::selection {
+            background: #e3e1d5;
+            color: var(--color-ink);
+        }
+
+        .container {
+            width: 100%;
+            max-width: var(--max-width);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- EDITORIAL HEADER & MARGINALIA --- */
+        header {
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: calc(var(--spacing-unit) * 1.5);
+            margin-bottom: calc(var(--spacing-unit) * 4);
+        }
+
+        .header-top {
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            color: var(--color-stone);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: calc(var(--spacing-unit) * 2.5);
+            user-select: none;
+        }
+
+        .header-brand { font-weight: 600; }
+        .header-date { font-weight: 300; }
+
+        .epigraph {
+            font-size: 1.15rem;
+            line-height: 1.6;
+            color: var(--color-slate);
+            font-weight: 300; /* Added this: drops the body text to Light */
+        }
+
+
+        .epigraph p {
+            margin-bottom: 0.85rem;
+            display: flex;
+        }
+
+        .epigraph p:last-child {
+            margin-bottom: 0;
+        }
+
+        .epigraph em {
+            font-style: italic;
+            color: var(--color-ink);
+        }
+
+        /* Reference numbers treated as marginalia/codes */
+        .ref-num {
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            color: var(--color-stone);
+            margin-right: 1rem;
+            margin-top: 0.35rem; 
+            font-weight: 600; /* Increased from 500: makes them architectural pillars */
+            letter-spacing: 0.05em;
+            flex-shrink: 0;
+        }
+
+
+        /* --- TYPEWRITER CANVAS --- */
+        .canvas-area {
+            position: relative;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* The Dramatic Pivot Point */
+        #prompt-container {
+            font-size: 3.25rem;
+            font-weight: 300;
+            font-style: italic;
+            line-height: 1.1;
+            color: var(--color-ink);
+            margin-bottom: calc(var(--spacing-unit) * 3.5);
+            min-height: 1.2em; /* Prevents jumping */
+        }
+
+        .reflection-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .reflection-list li {
+            position: relative;
+            margin-bottom: 1.25rem;
+            min-height: 1.5em; 
+            padding-left: 2.25rem; 
+            font-weight: 500; /* Added this: gives the questions a solid, authoritative weight */
+        }
+
+
+        /* Deconstructed List Numbers */
+        .list-num {
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            color: var(--color-stone);
+            font-weight: 600; /* Increased from 500 to match the reference numbers above */
+            position: absolute;
+            left: 0;
+            top: 0.6rem; 
+            letter-spacing: 0.05em;
+        }
+
+        /* Analog Block Cursor - scales dynamically based on em units! */
+        .cursor {
+            display: inline-block;
+            width: 0.05em;
+            height: 1.05em;
+            background-color: var(--color-stone);
+            vertical-align: text-bottom;
+            margin-left: 0.1em;
+            animation: blink 1s step-start infinite;
+        }
+
+        .cursor.hidden {
+            display: none;
+            animation: none;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Responsive scaling */
+        @media (max-width: 768px) {
+            body { font-size: 1.4rem; }
+            #prompt-container { font-size: 2.5rem; margin-bottom: calc(var(--spacing-unit) * 2.5); }
+            .epigraph { font-size: 1.05rem; }
+            .list-num { top: 0.45rem; }
+            header { margin-bottom: calc(var(--spacing-unit) * 2.5); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Minimalist Header & Epigraphs -->
+        <header>
+            <div class="header-top">
+                <div class="header-brand">Humanity Flourishes</div>
+                <div class="header-date" id="current-date"></div>
+            </div>
+            <div class="epigraph">
+                <p><span class="ref-num">118.</span> <span>And yet we must remember that humanity flourishes not <em>despite</em> limitations, but often <em>through</em> them.</span></p>
+                <p><span class="ref-num">111.</span> <span>Every design choice reflects a vision of humanity.</span></p>
+            </div>
+        </header>
+
+        <!-- Main Canvas -->
+        <div class="canvas-area">
+            <div id="prompt-container"><span id="line-0"></span></div>
+            
+            <ul class="reflection-list">
+                <li><span id="line-1"></span></li>
+                <li><span id="line-2"></span></li>
+                <li><span id="line-3"></span></li>
+                <li><span id="line-4"></span></li>
+                <li><span id="line-5"></span></li>
+                <li><span id="line-6"></span></li>
+                <li><span id="line-7"></span></li>
+            </ul>
+        </div>
+        
+        <!-- Global Cursor to be moved by JS -->
+        <span id="block-cursor" class="cursor hidden"></span>
+    </div>
+
+    <script>
+        // 1. Set Date with elegant formatting
+        const dateElement = document.getElementById('current-date');
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        dateElement.textContent = new Date().toLocaleDateString('en-US', options);
+
+        // 2. Typewriter Configuration
+        // Note: The numbers have been separated from the text sequence.
+        const textSequence = [
+            { id: "line-0", text: "Does my choice:", baseSpeed: 55 }, // Slower, more dramatic typing for the big italic text
+            { id: "line-1", num: "1.", text: "Have affection for humans?", baseSpeed: 30 },
+            { id: "line-2", num: "2.", text: "See humans as a face, or a function?", baseSpeed: 30 },
+            { id: "line-3", num: "3.", text: "Turn to God, or build a god?", baseSpeed: 30 },
+            { id: "line-4", num: "4.", text: "Calculate a person’s future, or elevate their freedom?", baseSpeed: 30 },
+            { id: "line-5", num: "5.", text: "Monopolize power and possessions, or share them?", baseSpeed: 30 },
+            { id: "line-6", num: "6.", text: "See people as a project, or a person?", baseSpeed: 30 },
+            { id: "line-7", num: "7.", text: "Lead people to a shared life, or an isolated one?", baseSpeed: 30 }
+        ];
+
+        const cursorElement = document.getElementById('block-cursor');
+        let lineIndex = 0;
+        let charIndex = 0;
+        const typingVariance = 35; // Random variance added to simulate human keystrokes
+
+        // 3. Continuous Typing Engine
+        function typeWriter() {
+            if (lineIndex >= textSequence.length) {
+                // All typing complete. Leave cursor blinking elegantly at the end.
+                return; 
+            }
+
+            const currentLine = textSequence[lineIndex];
+            const currentElement = document.getElementById(currentLine.id);
+
+            // On the very first character of a new line, initialize the line setup
+            if (charIndex === 0) {
+                cursorElement.classList.remove('hidden');
+                
+                // If it's a list item, inject the architectural number scaffolding instantly
+                if (currentLine.num) {
+                    const numSpan = document.createElement('span');
+                    numSpan.className = 'list-num';
+                    numSpan.textContent = currentLine.num;
+                    currentElement.parentElement.insertBefore(numSpan, currentElement);
+                }
+                
+                // Attach the cursor right after the text span (it will inherit the parent's font size perfectly)
+                currentElement.after(cursorElement);
+            }
+
+            if (charIndex < currentLine.text.length) {
+                const char = currentLine.text.charAt(charIndex);
+                currentElement.textContent += char;
+                charIndex++;
+                
+                // Calculate delay: base speed + random variance
+                let delay = currentLine.baseSpeed + (Math.random() * typingVariance);
+                
+                // Add deliberate pauses for punctuation to mimic human thought patterns
+                if (char === ':' || char === '?' || char === ',' || char === '.') {
+                    delay += (char === ',' || char === '.' ? 250 : 650); 
+                }
+
+                setTimeout(typeWriter, delay);
+            } else {
+                // Line finished. Move to the next line.
+                lineIndex++;
+                charIndex = 0;
+                
+                // Allow a longer, meditative breath before starting the next question
+                setTimeout(typeWriter, 800);
+            }
+        }
+
+        // 4. Initialization
+        window.onload = () => {
+            // A deliberate, quiet pause before the machine "wakes up"
+            setTimeout(typeWriter, 1200);
+        };
+    </script>
+</body>
+</html>
