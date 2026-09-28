@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>7 Questions | Humanity Flourishes</title>
     
-    <!-- High-end Editorial Serif (Added 300i for the delicate sweeping italic) -->
+    <!-- High-end Editorial Serif: EB Garamond -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -20,11 +20,11 @@
             --color-border: #e6e4dc;      /* Subtle border tone */
             
             /* Typography */
-            --font-serif: 'Crimson Pro', Georgia, serif;
+            --font-serif: 'EB Garamond', Georgia, serif;
             --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             
             /* Layout Sizing */
-            --max-width: 840px;           
+            --max-width: 1200px; /* Widened for the editorial 2-column layout */          
             --spacing-unit: 1.5rem;
         }
 
@@ -45,7 +45,7 @@
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            padding: calc(var(--spacing-unit) * 3) var(--spacing-unit) 20vh var(--spacing-unit);
+            padding: calc(var(--spacing-unit) * 3) var(--spacing-unit) 15vh var(--spacing-unit);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
@@ -62,11 +62,11 @@
             flex-direction: column;
         }
 
-        /* --- EDITORIAL HEADER & MARGINALIA --- */
+        /* --- EDITORIAL HEADER --- */
         header {
             border-bottom: 1px solid var(--color-border);
             padding-bottom: calc(var(--spacing-unit) * 1.5);
-            margin-bottom: calc(var(--spacing-unit) * 4);
+            margin-bottom: calc(var(--spacing-unit) * 3);
         }
 
         .header-top {
@@ -78,65 +78,123 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 1.5rem; /* Ensures the elements never cram together */
+            flex-wrap: wrap; /* Allows natural wrapping on incredibly narrow screens */
             margin-bottom: calc(var(--spacing-unit) * 2.5);
             user-select: none;
         }
 
         .header-brand { font-weight: 600; }
-        .header-date { font-weight: 300; }
+        .header-date { font-weight: 400; }
 
         .epigraph {
-            font-size: 1.15rem;
+            font-family: var(--font-sans); /* Returned to sleek sans-serif */
+            font-size: 1.05rem; /* Slightly smaller to balance sans-serif visually */
             line-height: 1.6;
             color: var(--color-slate);
-            font-weight: 300; /* Added this: drops the body text to Light */
+            font-weight: 300; 
+            max-width: 840px; 
         }
-
 
         .epigraph p {
             margin-bottom: 0.85rem;
             display: flex;
         }
 
-        .epigraph p:last-child {
-            margin-bottom: 0;
+        .epigraph p:last-child { margin-bottom: 0; }
+        
+        .epigraph em { 
+            font-style: italic; 
+            font-weight: 400; /* Subtle bump so italics stand out in sans-serif */
+            color: var(--color-ink); 
         }
 
-        .epigraph em {
-            font-style: italic;
-            color: var(--color-ink);
-        }
-
-        /* Reference numbers treated as marginalia/codes */
         .ref-num {
             font-family: var(--font-sans);
             font-size: 0.75rem;
             color: var(--color-stone);
-            margin-right: 1rem;
+            margin-right: 1.25rem;
             margin-top: 0.35rem; 
-            font-weight: 600; /* Increased from 500: makes them architectural pillars */
+            font-weight: 600; 
             letter-spacing: 0.05em;
             flex-shrink: 0;
         }
 
-
-        /* --- TYPEWRITER CANVAS --- */
-        .canvas-area {
-            position: relative;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
+        /* --- THE GRID: MARGINALIA & CANVAS --- */
+        .layout-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.6fr; 
+            gap: 4.5rem;
+            align-items: start;
         }
 
-        /* The Dramatic Pivot Point */
+        /* --- THE MANIFESTO (Left Column) --- */
+        .manifesto {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            color: var(--color-slate);
+            font-weight: 400; 
+            padding-right: 1.5rem;
+            position: relative;
+        }
+
+        /* The vertical editorial divider */
+        .manifesto::after {
+            content: '';
+            position: absolute;
+            right: -2.25rem;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background-color: var(--color-border);
+        }
+
+        .section-label {
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            color: var(--color-stone);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .manifesto p {
+            margin-bottom: 1.25rem;
+        }
+
+        /* The drop cap: signaling an intimate, written confession */
+        .manifesto p:first-of-type::first-letter {
+            float: left;
+            font-size: 3.8rem;
+            line-height: 0.75;
+            padding-top: 0.35rem;
+            padding-right: 0.6rem;
+            color: var(--color-ink);
+            font-weight: 400;
+        }
+
+        .manifesto .highlight {
+            color: var(--color-ink);
+            font-weight: 500;
+        }
+
+        /* --- TYPEWRITER CANVAS (Right Column) --- */
+        .canvas-area {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding-top: 2rem; 
+        }
+
         #prompt-container {
             font-size: 3.25rem;
-            font-weight: 300;
-            font-style: italic;
+            font-weight: 500; 
+            font-style: italic; 
             line-height: 1.1;
             color: var(--color-ink);
-            margin-bottom: calc(var(--spacing-unit) * 3.5);
-            min-height: 1.2em; /* Prevents jumping */
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            min-height: 1.2em; 
         }
 
         .reflection-list {
@@ -148,24 +206,20 @@
             position: relative;
             margin-bottom: 1.25rem;
             min-height: 1.5em; 
-            padding-left: 2.25rem; 
-            font-weight: 500; /* Added this: gives the questions a solid, authoritative weight */
+            padding-left: 2.5rem; /* Increased slightly to handle larger Garamond numbers */
+            font-weight: 400; 
         }
 
-
-        /* Deconstructed List Numbers */
         .list-num {
-            font-family: var(--font-sans);
-            font-size: 0.75rem;
+            font-family: var(--font-serif);
+            font-size: 1em; /* Perfectly matches the list text size */
             color: var(--color-stone);
-            font-weight: 600; /* Increased from 500 to match the reference numbers above */
+            font-weight: 400; 
             position: absolute;
             left: 0;
-            top: 0.6rem; 
-            letter-spacing: 0.05em;
+            top: 0; /* Aligns perfectly since font and line-height are shared */
         }
 
-        /* Analog Block Cursor - scales dynamically based on em units! */
         .cursor {
             display: inline-block;
             width: 0.05em;
@@ -176,23 +230,40 @@
             animation: blink 1s step-start infinite;
         }
 
-        .cursor.hidden {
-            display: none;
-            animation: none;
-        }
+        .cursor.hidden { display: none; animation: none; }
 
         @keyframes blink {
             0%, 100% { opacity: 1; }
             50% { opacity: 0; }
         }
 
-        /* Responsive scaling */
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 960px) {
+            .layout-grid {
+                grid-template-columns: 1fr; /* Stack on smaller screens */
+                gap: 3rem;
+            }
+            .manifesto::after {
+                /* Turn the vertical divider into a horizontal one */
+                right: 0;
+                top: auto;
+                bottom: -1.5rem;
+                width: 100%;
+                height: 1px;
+            }
+            .canvas-area {
+                padding-top: 1rem;
+            }
+            .manifesto {
+                padding-right: 0;
+            }
+        }
+
         @media (max-width: 768px) {
             body { font-size: 1.4rem; }
-            #prompt-container { font-size: 2.5rem; margin-bottom: calc(var(--spacing-unit) * 2.5); }
-            .epigraph { font-size: 1.05rem; }
-            .list-num { top: 0.45rem; }
-            header { margin-bottom: calc(var(--spacing-unit) * 2.5); }
+            #prompt-container { font-size: 2.5rem; margin-bottom: calc(var(--spacing-unit) * 2); }
+            .epigraph { font-size: 0.95rem; }
+            header { margin-bottom: calc(var(--spacing-unit) * 2); }
         }
     </style>
 </head>
@@ -210,35 +281,64 @@
             </div>
         </header>
 
-        <!-- Main Canvas -->
-        <div class="canvas-area">
-            <div id="prompt-container"><span id="line-0"></span></div>
+        <!-- Two-Column Grid -->
+        <div class="layout-grid">
             
-            <ul class="reflection-list">
-                <li><span id="line-1"></span></li>
-                <li><span id="line-2"></span></li>
-                <li><span id="line-3"></span></li>
-                <li><span id="line-4"></span></li>
-                <li><span id="line-5"></span></li>
-                <li><span id="line-6"></span></li>
-                <li><span id="line-7"></span></li>
-            </ul>
-        </div>
+            <!-- Left Column: The Manifesto -->
+            <aside class="manifesto">
+                <div class="section-label">Author's Context</div>
+                <p>I am frequently guilty of a technocratic mindset. Of a cold efficiency that sees me, and you, as a project to optimize. I don't like it, but it's true.</p>
+                <p>I’m a software developer. So it’s no surprise that <a href="https://www.vatican.va/content/leo-xiv/en/encyclicals/documents/20260515-magnifica-humanitas.html" target ="_blank"><em>Magnifica Humanitas</em></a> stirred much inside me. Certainly hope, but also struggle.</p>
+                <p>How should I, with so little power or influence, respond to the call to “build a world where everyone can flourish”? If it’s true that “no one is so weak that they cannot play their part,” then what exactly is my part?</p>
+                <p>It took me a months to realize that I am not actually powerless.</p>
+                <p>There is a line from the encyclical that I want embossed or printed or somehow encapsulated forever, because it hit me like a brick: “Every design choice reflects a vision of humanity.”</p>
+                <p><span class="highlight">If every choice at work reflects a vision of humanity, exactly what vision does my choice reflect?</span></p>
+				<p>So I distilled a short list of questions, directly from the encyclical, to guide my work. These questions immediately reveal the heart of what I'm building.</p>
+				<p>I use this list daily to question my choices and respond to the stirrings of my conscience. It has meant a great deal to me, and I wanted to share it, in the hopes others find it useful in making it actionable in their daily life.</p>
+				<p>- Edward</p>
+			</aside>
+
+            <!-- Right Column: The Main Canvas -->
+            <div class="canvas-area">
+                <div id="prompt-container"><span id="line-0"></span></div>
+                
+                <ul class="reflection-list">
+                    <li><span id="line-1"></span></li>
+                    <li><span id="line-2"></span></li>
+                    <li><span id="line-3"></span></li>
+                    <li><span id="line-4"></span></li>
+                    <li><span id="line-5"></span></li>
+                    <li><span id="line-6"></span></li>
+                    <li><span id="line-7"></span></li>
+                </ul>
+            </div>
+
+        </div> <!-- End Grid -->
         
         <!-- Global Cursor to be moved by JS -->
         <span id="block-cursor" class="cursor hidden"></span>
     </div>
 
     <script>
-        // 1. Set Date with elegant formatting
-        const dateElement = document.getElementById('current-date');
-        const options = { year: 'numeric', month: 'long', day: 'numeric' };
-        dateElement.textContent = new Date().toLocaleDateString('en-US', options);
+        // 1. Set Date responsively (Short month on mobile, long month on desktop)
+        function setDate() {
+            const dateElement = document.getElementById('current-date');
+            const isMobile = window.innerWidth < 600;
+            const options = { 
+                year: 'numeric', 
+                month: isMobile ? 'short' : 'long', 
+                day: 'numeric' 
+            };
+            dateElement.textContent = new Date().toLocaleDateString('en-US', options);
+        }
+        
+        // Run on load and listen for window resizing
+        setDate();
+        window.addEventListener('resize', setDate);
 
         // 2. Typewriter Configuration
-        // Note: The numbers have been separated from the text sequence.
         const textSequence = [
-            { id: "line-0", text: "Does my choice:", baseSpeed: 55 }, // Slower, more dramatic typing for the big italic text
+            { id: "line-0", text: "Does my choice:", baseSpeed: 55 },
             { id: "line-1", num: "1.", text: "Have affection for humans?", baseSpeed: 30 },
             { id: "line-2", num: "2.", text: "See humans as a face, or a function?", baseSpeed: 30 },
             { id: "line-3", num: "3.", text: "Turn to God, or build a god?", baseSpeed: 30 },
@@ -251,23 +351,20 @@
         const cursorElement = document.getElementById('block-cursor');
         let lineIndex = 0;
         let charIndex = 0;
-        const typingVariance = 35; // Random variance added to simulate human keystrokes
+        const typingVariance = 35; 
 
         // 3. Continuous Typing Engine
         function typeWriter() {
             if (lineIndex >= textSequence.length) {
-                // All typing complete. Leave cursor blinking elegantly at the end.
                 return; 
             }
 
             const currentLine = textSequence[lineIndex];
             const currentElement = document.getElementById(currentLine.id);
 
-            // On the very first character of a new line, initialize the line setup
             if (charIndex === 0) {
                 cursorElement.classList.remove('hidden');
                 
-                // If it's a list item, inject the architectural number scaffolding instantly
                 if (currentLine.num) {
                     const numSpan = document.createElement('span');
                     numSpan.className = 'list-num';
@@ -275,7 +372,6 @@
                     currentElement.parentElement.insertBefore(numSpan, currentElement);
                 }
                 
-                // Attach the cursor right after the text span (it will inherit the parent's font size perfectly)
                 currentElement.after(cursorElement);
             }
 
@@ -284,28 +380,22 @@
                 currentElement.textContent += char;
                 charIndex++;
                 
-                // Calculate delay: base speed + random variance
                 let delay = currentLine.baseSpeed + (Math.random() * typingVariance);
                 
-                // Add deliberate pauses for punctuation to mimic human thought patterns
                 if (char === ':' || char === '?' || char === ',' || char === '.') {
                     delay += (char === ',' || char === '.' ? 250 : 650); 
                 }
 
                 setTimeout(typeWriter, delay);
             } else {
-                // Line finished. Move to the next line.
                 lineIndex++;
                 charIndex = 0;
-                
-                // Allow a longer, meditative breath before starting the next question
                 setTimeout(typeWriter, 800);
             }
         }
 
         // 4. Initialization
         window.onload = () => {
-            // A deliberate, quiet pause before the machine "wakes up"
             setTimeout(typeWriter, 1200);
         };
     </script>
