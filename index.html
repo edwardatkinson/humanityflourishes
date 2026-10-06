@@ -13,27 +13,22 @@
     <style>
         :root {
             /* Color Palette: The Ink System */
-            --color-bg: #faf9f5;          /* Warm Ivory Canvas */
-            --color-ink: #0a0a09;         /* Absolute Presence (Active/Main Text) */
-            --color-slate: #4a4843;       /* The Echo (Historical/Quotes) */
-            --color-stone: #8c8a81;       /* The Architecture (UI, Numbers) */
-            --color-border: #e6e4dc;      /* Subtle border tone */
+            --color-bg: #faf9f5;          
+            --color-ink: #0a0a09;         
+            --color-slate: #4a4843;       
+            --color-stone: #8c8a81;       
+            --color-border: #e6e4dc;      
             
             /* Typography */
             --font-serif: 'EB Garamond', Georgia, serif;
             --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             
             /* Layout Sizing */
-            --max-width: 1200px; /* Widened for the editorial 2-column layout */          
+            --max-width: 840px; /* Returned to single-column reading width */          
             --spacing-unit: 1.5rem;
         }
 
-        /* --- BASE RESETS & CANVAS --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             background-color: var(--color-bg);
@@ -50,10 +45,7 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
-        ::selection {
-            background: #e3e1d5;
-            color: var(--color-ink);
-        }
+        ::selection { background: #e3e1d5; color: var(--color-ink); }
 
         .container {
             width: 100%;
@@ -66,7 +58,7 @@
         header {
             border-bottom: 1px solid var(--color-border);
             padding-bottom: calc(var(--spacing-unit) * 1.5);
-            margin-bottom: calc(var(--spacing-unit) * 3);
+            margin-bottom: calc(var(--spacing-unit) * 2);
         }
 
         .header-top {
@@ -78,36 +70,26 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 1.5rem; /* Ensures the elements never cram together */
-            flex-wrap: wrap; /* Allows natural wrapping on incredibly narrow screens */
+            gap: 1.5rem; 
+            flex-wrap: wrap; 
             margin-bottom: calc(var(--spacing-unit) * 2.5);
-            user-select: none;
+            
         }
 
         .header-brand { font-weight: 600; }
         .header-date { font-weight: 400; }
 
         .epigraph {
-            font-family: var(--font-sans); /* Returned to sleek sans-serif */
-            font-size: 1.05rem; /* Slightly smaller to balance sans-serif visually */
+            font-family: var(--font-sans); 
+            font-size: 1.05rem; 
             line-height: 1.6;
             color: var(--color-slate);
             font-weight: 300; 
-            max-width: 840px; 
         }
 
-        .epigraph p {
-            margin-bottom: 0.85rem;
-            display: flex;
-        }
-
+        .epigraph p { margin-bottom: 0.85rem; display: flex; }
         .epigraph p:last-child { margin-bottom: 0; }
-        
-        .epigraph em { 
-            font-style: italic; 
-            font-weight: 400; /* Subtle bump so italics stand out in sans-serif */
-            color: var(--color-ink); 
-        }
+        .epigraph em { font-style: italic; font-weight: 400; color: var(--color-ink); }
 
         .ref-num {
             font-family: var(--font-sans);
@@ -120,71 +102,20 @@
             flex-shrink: 0;
         }
 
-        /* --- THE GRID: MARGINALIA & CANVAS --- */
-        .layout-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.6fr; 
-            gap: 4.5rem;
-            align-items: start;
-        }
-
-        /* --- THE MANIFESTO (Left Column) --- */
-        .manifesto {
-            font-size: 1.2rem;
-            line-height: 1.7;
+        /* --- THE LEDE --- */
+        .lede {
+            font-size: 1.4rem;
+            line-height: 1.6;
             color: var(--color-slate);
-            font-weight: 400; 
-            padding-right: 1.5rem;
-            position: relative;
+            margin-bottom: calc(var(--spacing-unit) * 4);
+            max-width: 90%;
         }
 
-        /* The vertical editorial divider */
-        .manifesto::after {
-            content: '';
-            position: absolute;
-            right: -2.25rem;
-            top: 0;
-            bottom: 0;
-            width: 1px;
-            background-color: var(--color-border);
-        }
-
-        .section-label {
-            font-family: var(--font-sans);
-            font-size: 0.75rem;
-            color: var(--color-stone);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 1.5rem;
-            font-weight: 600;
-        }
-
-        .manifesto p {
-            margin-bottom: 1.25rem;
-        }
-
-        /* The drop cap: signaling an intimate, written confession */
-        .manifesto p:first-of-type::first-letter {
-            float: left;
-            font-size: 3.8rem;
-            line-height: 0.75;
-            padding-top: 0.35rem;
-            padding-right: 0.6rem;
-            color: var(--color-ink);
-            font-weight: 400;
-        }
-
-        .manifesto .highlight {
-            color: var(--color-ink);
-            font-weight: 500;
-        }
-
-        /* --- TYPEWRITER CANVAS (Right Column) --- */
+        /* --- TYPEWRITER CANVAS --- */
         .canvas-area {
             position: relative;
             display: flex;
             flex-direction: column;
-            padding-top: 2rem; 
         }
 
         #prompt-container {
@@ -197,27 +128,24 @@
             min-height: 1.2em; 
         }
 
-        .reflection-list {
-            list-style: none;
-            padding: 0;
-        }
+        .reflection-list { list-style: none; padding: 0; }
 
         .reflection-list li {
             position: relative;
             margin-bottom: 1.25rem;
             min-height: 1.5em; 
-            padding-left: 2.5rem; /* Increased slightly to handle larger Garamond numbers */
+            padding-left: 2.5rem; 
             font-weight: 400; 
         }
 
         .list-num {
             font-family: var(--font-serif);
-            font-size: 1em; /* Perfectly matches the list text size */
+            font-size: 1em; 
             color: var(--color-stone);
             font-weight: 400; 
             position: absolute;
             left: 0;
-            top: 0; /* Aligns perfectly since font and line-height are shared */
+            top: 0; 
         }
 
         .cursor {
@@ -237,39 +165,80 @@
             50% { opacity: 0; }
         }
 
-        /* --- RESPONSIVE DESIGN --- */
-        @media (max-width: 960px) {
-            .layout-grid {
-                grid-template-columns: 1fr; /* Stack on smaller screens */
-                gap: 3rem;
-            }
-            .manifesto::after {
-                /* Turn the vertical divider into a horizontal one */
-                right: 0;
-                top: auto;
-                bottom: -1.5rem;
-                width: 100%;
-                height: 1px;
-            }
-            .canvas-area {
-                padding-top: 1rem;
-            }
-            .manifesto {
-                padding-right: 0;
-            }
+        /* --- SCROLL PROMPT --- */
+        .scroll-prompt {
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            color: var(--color-stone);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-align: center;
+            margin-top: calc(var(--spacing-unit) * 4);
+            opacity: 0;
+            transition: opacity 1.5s ease;
+            user-select: none;
         }
 
+        .scroll-prompt.visible { opacity: 1; }
+
+        /* --- THE AFTERWORD (Context) --- */
+        .afterword {
+            margin-top: calc(var(--spacing-unit) * 6);
+            padding-top: calc(var(--spacing-unit) * 3);
+            border-top: 1px solid var(--color-border);
+            font-size: 1.2rem;
+            line-height: 1.7;
+            color: var(--color-slate);
+            font-weight: 400; 
+            max-width: 720px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-label {
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            color: var(--color-stone);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .afterword p { margin-bottom: 1.25rem; }
+
+        /* The drop cap */
+        .afterword p:first-of-type::first-letter {
+            float: left;
+            font-size: 3.8rem;
+            line-height: 0.75;
+            padding-top: 0.35rem;
+            padding-right: 0.6rem;
+            color: var(--color-ink);
+            font-weight: 400;
+        }
+
+        .afterword .highlight {
+            color: var(--color-ink);
+            font-weight: 500;
+        }
+
+        /* --- RESPONSIVE DESIGN --- */
         @media (max-width: 768px) {
-            body { font-size: 1.4rem; }
+            body { font-size: 1.4rem; padding-top: calc(var(--spacing-unit) * 2); }
             #prompt-container { font-size: 2.5rem; margin-bottom: calc(var(--spacing-unit) * 2); }
             .epigraph { font-size: 0.95rem; }
+            .lede { font-size: 1.2rem; max-width: 100%; margin-bottom: calc(var(--spacing-unit) * 3); }
             header { margin-bottom: calc(var(--spacing-unit) * 2); }
+            .afterword { margin-top: calc(var(--spacing-unit) * 4); }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Minimalist Header & Epigraphs -->
+        
+        <!-- Header & Epigraphs -->
         <header>
             <div class="header-top">
                 <div class="header-brand">Humanity Flourishes</div>
@@ -281,46 +250,54 @@
             </div>
         </header>
 
-        <!-- Two-Column Grid -->
-        <div class="layout-grid">
+        <!-- The Lede (Invitation) -->
+        <div class="lede">
+            I struggled with making <a href="https://www.vatican.va/content/leo-xiv/en/encyclicals/documents/20260515-magnifica-humanitas.html" target="_blank"><em>Magnifica Humanitas</em></a> actionable and relevant to my life. 
+			<br /><br />So I compiled these questions, inspired by the letter, to examine how I use AI in my work as a software developer. 
+			<br /><br />Please use these questions in any way you like. For me, they've transformed my work.
+        </div>
+
+        <!-- The Main Canvas (Questions) -->
+        <div class="canvas-area">
+            <div id="prompt-container"><span id="line-0"></span></div>
             
-            <!-- Left Column: The Manifesto -->
-            <aside class="manifesto">
-                <div class="section-label">Author's Context</div>
-                <p>I am frequently guilty of a technocratic mindset. Of a cold efficiency that sees me, and you, as a project to optimize. I don't like it, but it's true.</p>
-                <p>I’m a software developer. So it’s no surprise that <a href="https://www.vatican.va/content/leo-xiv/en/encyclicals/documents/20260515-magnifica-humanitas.html" target ="_blank"><em>Magnifica Humanitas</em></a> stirred much inside me. Certainly hope, but also struggle.</p>
-                <p>How should I, with so little power or influence, respond to the call to “build a world where everyone can flourish”? If it’s true that “no one is so weak that they cannot play their part,” then what exactly is my part?</p>
-                <p>It took me a months to realize that I am not actually powerless.</p>
-                <p>There is a line from the encyclical that I want embossed or printed or somehow encapsulated forever, because it hit me like a brick: “Every design choice reflects a vision of humanity.”</p>
-                <p><span class="highlight">If every choice at work reflects a vision of humanity, exactly what vision does my choice reflect?</span></p>
-				<p>So I distilled a short list of questions, directly from the encyclical, to guide my work. These questions immediately reveal the heart of what I'm building.</p>
-				<p>I use this list daily to guide my choices at work. It has meant a great deal to me, and I wanted to share it, in the hopes others can make <em>Magnifica Humanitas</em> relevant to their daily life.</p>
-				<p>- Edward</p>
-			</aside>
+            <ul class="reflection-list">
+                <li><span id="line-1"></span></li>
+                <li><span id="line-2"></span></li>
+                <li><span id="line-3"></span></li>
+                <li><span id="line-4"></span></li>
+                <li><span id="line-5"></span></li>
+                <li><span id="line-6"></span></li>
+                <li><span id="line-7"></span></li>
+            </ul>
+        </div>
 
-            <!-- Right Column: The Main Canvas -->
-            <div class="canvas-area">
-                <div id="prompt-container"><span id="line-0"></span></div>
-                
-                <ul class="reflection-list">
-                    <li><span id="line-1"></span></li>
-                    <li><span id="line-2"></span></li>
-                    <li><span id="line-3"></span></li>
-                    <li><span id="line-4"></span></li>
-                    <li><span id="line-5"></span></li>
-                    <li><span id="line-6"></span></li>
-                    <li><span id="line-7"></span></li>
-                </ul>
-            </div>
+        <!-- Scroll Instruction (Fades in dynamically) -->
+        <div class="scroll-prompt" id="scroll-prompt">
+            Scroll for the author's context &darr;
+        </div>
 
-        </div> <!-- End Grid -->
-        
-        <!-- Global Cursor to be moved by JS -->
-        <span id="block-cursor" class="cursor hidden"></span>
-    </div>
+        <!-- The Afterword (Author's Context) -->
+        <div class="afterword">
+            <div class="section-label">Author's Context</div>
+            <p>I am guilty of a technocratic mindset. Of a shameful, cold efficiency that sees me, and you, as a project to optimize. Not as a human face and soul.</p>
+            <p>I’m a software developer. So it’s no surprise that <em>Magnifica Humanitas</em> stirred much inside me. Yes hope, but also struggle.</p>
+            <p>How can I, with so little power or influence, respond to the call to “build a world where everyone can flourish”? If it’s true that “no one is so weak that they cannot play their part,” then what is my part?</p>
+            <p>Thankfully, there was a line that hit me like a brick: <span class="highlight">“Every design choice reflects a vision of humanity.”</span></p>
+            <p>It seems obvious now, but it took me a few months to realize that this line tells me exactly what I actually can do. It turns out, I’m not powerless.</p>
+            <p>This website here is my response to the encyclical. Humanityflourishes is a gut check on using AI. It is a short list of questions that immediately reveal the heart of my work.</p>
+            <p>I have been using this litmus test daily to question my choices and respond to the stirrings of my conscience. It has changed my work substantially, and I wanted to share it, in the hopes others find it useful in making the encyclical actionable in their daily life.</p>
+            <p>If every choice at work reflects a vision of humanity, exactly what vision is my choice reflecting?</p>
+			<p>Is my work building a world where humanity flourishes?</p>
+        </div>
+
+    </div> 
+
+    <!-- Global Cursor -->
+    <span id="block-cursor" class="cursor hidden"></span>
 
     <script>
-        // 1. Set Date responsively (Short month on mobile, long month on desktop)
+        // 1. Set Date responsively
         function setDate() {
             const dateElement = document.getElementById('current-date');
             const isMobile = window.innerWidth < 600;
@@ -331,14 +308,12 @@
             };
             dateElement.textContent = new Date().toLocaleDateString('en-US', options);
         }
-        
-        // Run on load and listen for window resizing
         setDate();
         window.addEventListener('resize', setDate);
 
         // 2. Typewriter Configuration
         const textSequence = [
-            { id: "line-0", text: "Does my choice:", baseSpeed: 55 },
+            { id: "line-0", text: "Does how I use AI:", baseSpeed: 55 },
             { id: "line-1", num: "1.", text: "Have affection for humans?", baseSpeed: 30 },
             { id: "line-2", num: "2.", text: "See humans as a face, or a function?", baseSpeed: 30 },
             { id: "line-3", num: "3.", text: "Turn to God, or build a god?", baseSpeed: 30 },
@@ -356,6 +331,11 @@
         // 3. Continuous Typing Engine
         function typeWriter() {
             if (lineIndex >= textSequence.length) {
+                // When finished typing, reveal the scroll prompt
+                setTimeout(() => {
+                    const scrollPrompt = document.getElementById('scroll-prompt');
+                    if(scrollPrompt) scrollPrompt.classList.add('visible');
+                }, 1200);
                 return; 
             }
 
